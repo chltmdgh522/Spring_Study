@@ -15,13 +15,14 @@ public class OrderApp {
 
         long memberId = 1L;
 
-        Member member = new Member(memberId, "최승호", Grade.BASIC);
+        Member member = new Member(memberId, "최승호", Grade.VIP);
         memberService.join(member);
 
         Order order = orderService.createOrder(memberId, "itemA", 10000);
 
 
         System.out.println("order=" + order);
+        System.out.println("order.calculatePrice=" + order.calculatePrice());
     }
 
 }
