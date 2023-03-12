@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class AppConfig {
-    @Bean
+    @Bean//(name="dafsd") ->이렇게 빈이름부여 가능
     public MemberService memberService() {
         return new MemberServiceImpl(memberRepository());
     }
