@@ -14,6 +14,16 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class AppConfig {
+    //call AppConfig.memberService();
+    //call AppConfig.memberRepository();
+    //call AppConfig.memberRepository();
+    //call AppConfig.orderService();
+    //call AppConfig.memberRepository();
+
+    //call AppConfig.memberService();
+    //call AppConfig.memberRepository();
+    //call AppConfig.orderService();
+
     @Bean//(name="dafsd") ->이렇게 빈이름부여 가능
     public MemberService memberService() {
         return new MemberServiceImpl(memberRepository());
@@ -30,6 +40,11 @@ public class AppConfig {
     public DiscountPolicy discountPolicy() {
         return new FixDiscountPolicy();
         //return new RateDiscountPolicy();
+    }
+
+    //테스트 용도
+    public MemberRepository getMemberRepository(){
+        return memberRepository();
     }
 
 
