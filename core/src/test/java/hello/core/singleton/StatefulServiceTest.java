@@ -18,10 +18,10 @@ class StatefulServiceTest {
         StatefulService statefulService2 = ac.getBean("statefulService", StatefulService.class);
 
         //ThreadA: A사용자 1만원 주문
-        int userAPrice=statefulService1.order("userA",10000);
+        int userAPrice = statefulService1.order("userA", 10000);
 
         //ThreadB: B사용자 2만원 주문
-        int userBPrice=statefulService2.order("userB",20000);
+        int userBPrice = statefulService2.order("userB", 20000);
 
         //ThreadA: A사용자 주문 조회
         /*int price=statefulService1.getPrice();
@@ -31,10 +31,10 @@ class StatefulServiceTest {
         //assertThat(statefulService1.getPrice()).isEqualTo(20000);
     }
 
-    static class TestConfig{
+    static class TestConfig {
 
         @Bean
-        public StatefulService statefulService(){
+        public StatefulService statefulService() {
             return new StatefulService();
         }
 
