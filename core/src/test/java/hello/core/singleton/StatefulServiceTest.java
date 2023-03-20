@@ -17,7 +17,7 @@ class StatefulServiceTest {
         StatefulService statefulService1 = ac.getBean("statefulService", StatefulService.class);
         StatefulService statefulService2 = ac.getBean("statefulService", StatefulService.class);
 
-        //ThreadA:   A사용자 1만원 주문
+        //ThreadA: A사용자 1만원 주문
         int userAPrice = statefulService1.order("userA", 10000);
 
         //ThreadB: B사용자 2만원 주문
