@@ -27,10 +27,13 @@ public class AppConfig {
 
     @Bean//(name="dafsd") ->이렇게 빈이름부여 가능
     public MemberService memberService() {
+
         return new MemberServiceImpl(memberRepository());
+        //return null;
     }
     @Bean
     public MemberRepository memberRepository() {
+        //
         return new MemoryMemberRepository();
     }
     @Bean

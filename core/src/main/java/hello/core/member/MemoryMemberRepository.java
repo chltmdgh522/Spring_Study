@@ -1,5 +1,6 @@
 package hello.core.member;
 
+import org.junit.jupiter.api.Test;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;

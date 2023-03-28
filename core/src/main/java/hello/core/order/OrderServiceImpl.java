@@ -14,16 +14,16 @@ public class OrderServiceImpl implements OrderService {
     //MemberRepository memberRepository = new MemoryMemberRepository();
     //DiscountPolicy discountPolicy = new FixDiscountPolicy();
     //DiscountPolicy discountPolicy = new RateDiscountPolicy();
-    MemberRepository memberRepository;
+    final MemberRepository memberRepository; //실수할때 fianl 쓰면 생성자 바로 알아낼 수 있음
     DiscountPolicy discountPolicy;
-    @Autowired //수정자
+    /*@Autowired //수정자
     public void setMemberRepository(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
     }
     @Autowired
     public void setDiscountPolicy(DiscountPolicy discountPolicy) {
         this.discountPolicy = discountPolicy;
-    }
+    }*/
 
     @Autowired
     public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
