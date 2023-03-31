@@ -2,9 +2,11 @@ package hello.core;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
+@ToString
 public class HelloLombok {
 
     private String name;
@@ -15,5 +17,6 @@ public class HelloLombok {
        helloLombok.setName("신기하다");
        String name=helloLombok.getName();
         System.out.println(name);
+        System.out.println(helloLombok);
     }
 }
