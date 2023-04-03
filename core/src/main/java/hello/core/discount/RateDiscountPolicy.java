@@ -1,12 +1,16 @@
 package hello.core.discount;
 
+import hello.core.annotation.MainDiscountPolicy;
 import hello.core.member.Grade;
 import hello.core.member.Member;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
 @Component
-@Qualifier("dd")
+//@Qualifier("mainDiscountPolicy")
+@MainDiscountPolicy
+@Primary//이걸먼저 선택할거다. //많이쓴다고함
 public class RateDiscountPolicy implements DiscountPolicy{
     int discountPercent=10;
     @Override
