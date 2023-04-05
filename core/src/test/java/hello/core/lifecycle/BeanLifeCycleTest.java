@@ -17,10 +17,11 @@ public class BeanLifeCycleTest {
     }
     @Configuration
     static class LifeCycleConfig{
-        @Bean
+        @Bean //(initMethod = "init", destroyMethod = "")
         public NetworkClient networkClient(){
             NetworkClient networkClient=new NetworkClient();
             networkClient.setUrl("http//hello-spring");
+            networkClient.url();
             return networkClient;
         }
     }
