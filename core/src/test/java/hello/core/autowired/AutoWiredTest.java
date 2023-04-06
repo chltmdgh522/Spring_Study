@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.Scope;
 
 import java.util.Optional;
 
@@ -13,6 +14,7 @@ public class AutoWiredTest {
     @Test
     public void AutowiredOption(){
         ApplicationContext ac =new AnnotationConfigApplicationContext(TestBean.class);
+        TestBean bean = ac.getBean(TestBean.class);
 
 
     }
