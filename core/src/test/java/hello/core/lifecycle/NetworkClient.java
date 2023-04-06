@@ -43,7 +43,7 @@ public class NetworkClient {
     }
 
     @PreDestroy
-    public void destory() {
+    public void close() {
         disconnect();
     }
 }
