@@ -16,7 +16,7 @@ public class HelloController {
     }
    // ${data} 모델에 키값을 갖고와서 치환해주는거
     @GetMapping("hello-mvc")
-    public String helloMvc(@RequestParam(name="name",req)String name, Model model){
+    public String helloMvc(@RequestParam("name")String name, Model model){
         model.addAttribute("name",name);
         return "hello-template";
     }
