@@ -19,5 +19,7 @@ public class RequestBodyStringServlet extends HttpServlet {
         String messageBody=StreamUtils.copyToString(inputStream, StandardCharsets.UTF_8); //바이트를 문자로 바꿔준다. 스트림 유틸을 스프링에서 제공해준거임
         System.out.println("messageBody = " + messageBody);
         response.getWriter().write("OK");
+
+
     }
 }

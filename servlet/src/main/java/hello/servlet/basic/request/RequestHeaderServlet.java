@@ -47,10 +47,9 @@ public class RequestHeaderServlet extends HttpServlet {
             String headerName=headerNames.nextElement();
             System.out.println("headerName = " + headerName);
         }*/
-
         //현재 방식
-        request.getHeaderNames().asIterator()
-                        .forEachRemaining(headerName -> System.out.println("headerName = " + headerName));
+       request.getHeaderNames().asIterator()
+                       .forEachRemaining(headerName-> System.out.println("headerName = " + headerName));
 
         System.out.println("--- Headers - end ---");
         System.out.println();

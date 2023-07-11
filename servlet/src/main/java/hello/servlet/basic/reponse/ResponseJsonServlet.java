@@ -25,7 +25,8 @@ public class ResponseJsonServlet extends HttpServlet {
         helloData.setAge(23);
 
         //{"username":"최승호","age":23}
-        String result = objectMapper.writeValueAsString(helloData); //객체라는 값을 써서 문자로 바꿔라
+        String result = objectMapper.writeValueAsString(helloData);
         response.getWriter().write(result);
+        System.out.println(result);
     }
 }
