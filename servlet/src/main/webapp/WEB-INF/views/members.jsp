@@ -1,7 +1,18 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ page import="hello.servlet.domain.member.Member" %>
+<%@ page import="java.util.List" %>
+<%@ page import="hello.servlet.domain.member.MemberRepository" %><%--
+  Created by IntelliJ IDEA.
+  User: chltm
+  Date: 2023-07-11
+  Time: 오전 10:40
+  To change this template use File | Settings | File Templates.
+--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
+<%
+  MemberRepository memberRepository=MemberRepository.getInstance();
+  List<Member> members = memberRepository.findAll();
+%>
 <html>
 <head>
   <meta charset="UTF-8">
@@ -16,12 +27,15 @@
   <th>age</th>
   </thead>
   <tbody>
-  <c:forEach var="item" items="${member}" >
-    <tr>
-      <td>item.id</td>
-      <td>item.username</td>
-      <td>item.age</td>
-  </c:forEach>
+  <%
+    for (Member member : members) {
+      out.write(" <tr>");
+      out.write(" <td>" + member.getId() + "</td>");
+      out.write(" <td>" + member.getUsername() + "</td>");
+      out.write(" <td>" + member.getAge() + "</td>");
+      out.write(" </tr>");
+    }
+  %>
   </tbody>
 </table>
 </body>

@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-@WebServlet(name="frontControllerServletV3", urlPatterns ="/front-controller/v3/*")
+@WebServlet(name = "frontControllerServletV3", urlPatterns = "/front-controller/v3/*")
 public class FrontControllerServletV3 extends HttpServlet {
 
     private Map<String, ControllerV3> controllerMap = new HashMap<>();
@@ -23,7 +23,7 @@ public class FrontControllerServletV3 extends HttpServlet {
     public FrontControllerServletV3() {
         controllerMap.put("/front-controller/v3/members/new-form", new MemberFormControllerV3());
         controllerMap.put("/front-controller/v3/members/save", new MemberSaveControllerV3());
-        controllerMap.put("/front-controller/v2/members", new MemberListControllerV3());
+        controllerMap.put("/front-controller/v3/members", new MemberListControllerV3());
     }
 
     @Override
@@ -54,9 +54,9 @@ public class FrontControllerServletV3 extends HttpServlet {
     }
 
     private Map<String, String> createParamMap(HttpServletRequest request) {
-        Map<String, String> paramMap = new HashMap<>();
+        Map<String, String> paramMap=new HashMap<>();
         request.getParameterNames().asIterator()
-                .forEachRemaining(paramName -> paramMap.put(paramName, request.getParameter(paramName)));
+                .forEachRemaining(paramName-> paramMap.put(paramName,request.getParameter(paramName)));
         return paramMap;
     }
 
