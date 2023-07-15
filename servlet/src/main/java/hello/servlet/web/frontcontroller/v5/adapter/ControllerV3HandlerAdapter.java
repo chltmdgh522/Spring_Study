@@ -12,9 +12,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ControllerV3HandlerAdapter implements MyHandlerAdapter { //v3를 지원하는 어뎁터
+
     @Override
     public boolean supports(Object handler) {
-        return(handler instanceof ControllerV3);
+        return (handler instanceof ControllerV3 controllerV3);
     }
 
     @Override
@@ -24,7 +25,6 @@ public class ControllerV3HandlerAdapter implements MyHandlerAdapter { //v3를 �
         ModelView mv = controller.process(paramMap);
         return mv;
     }
-
     private Map<String, String> createParamMap(HttpServletRequest request) {
         Map<String, String> paramMap=new HashMap<>();
         request.getParameterNames().asIterator()

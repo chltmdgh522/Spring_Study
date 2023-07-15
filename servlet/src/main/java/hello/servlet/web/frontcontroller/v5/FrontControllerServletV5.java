@@ -64,7 +64,6 @@ public class FrontControllerServletV5 extends HttpServlet {
 
         view.render(mv.getModel(), request, response);
     }
-
     private MyHandlerAdapter getHandlerAdapter(Object handler) {
         for (MyHandlerAdapter adapter : handlerAdapters) {
             if(adapter.supports(handler)){
