@@ -26,6 +26,12 @@ public class ItemRepository {
         return new ArrayList<>(store.values());
     }
 
+    public static void main(String[] args) {
+        Item item = new Item("A",10000,5);
+        Item item1 = new Item("A",1000,5);
+        System.out.println(item);
+        System.out.println(item1);
+    }
     public void update(Long itemId, Item updateParam){
         Item findItem= findById(itemId);
         findItem.setItemName(updateParam.getItemName());
