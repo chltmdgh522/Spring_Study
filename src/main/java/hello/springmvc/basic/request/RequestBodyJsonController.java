@@ -29,7 +29,9 @@ public class RequestBodyJsonController {
         log.info("messageBody={}",messageBody);
         HelloData helloData = objectMapper.readValue(messageBody, HelloData.class);
         log.info("username={}, age={}",helloData.getUsername(),helloData.getAge());
+
     }
+
 
     @ResponseBody
     @PostMapping("/request-body-json-v2")
@@ -37,7 +39,9 @@ public class RequestBodyJsonController {
         log.info("messageBody={}",messageBody);
         HelloData helloData = objectMapper.readValue(messageBody, HelloData.class);
         log.info("username={}, age={}",helloData.getUsername(),helloData.getAge());
+
         return "ok";
+
     }
 
     @ResponseBody
