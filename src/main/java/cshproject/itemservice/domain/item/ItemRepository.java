@@ -12,26 +12,19 @@ public class ItemRepository {
     private static final Map<Long, Item> store=new HashMap<>();
     private static long sequence = 0L;
 
-    public Item save (Item item){
+    public Item save(Item item){
         item.setId(++sequence);
-        store.put(item.getId(),item);
+        store.put(item.getId(), item);
         return item;
     }
 
     public Item findById(Long id){
         return store.get(id);
     }
-
     public List<Item> findAll(){
         return new ArrayList<>(store.values());
     }
 
-    public static void main(String[] args) {
-        Item item = new Item("A",10000,5);
-        Item item1 = new Item("A",1000,5);
-        System.out.println(item);
-        System.out.println(item1);
-    }
     public void update(Long itemId, Item updateParam){
         Item findItem= findById(itemId);
         findItem.setItemName(updateParam.getItemName());
