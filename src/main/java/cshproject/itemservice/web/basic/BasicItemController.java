@@ -63,7 +63,7 @@ public class BasicItemController {
         return "/basic/item";
     }
 
-   // @PostMapping("/add")
+    //@PostMapping("/add")
     public String addItemV3(@ModelAttribute Item item){
         //이름 지정안하면 클래스이름 앞글자만 소문자 되서 강제로 집어넣음
         itemRepository.save(item);
@@ -79,7 +79,7 @@ public class BasicItemController {
         return "redirect:/basic/items/" + item.getId();
     }
 
-    @PostMapping("/add")
+    //@PostMapping("/add")
     public String addItemV6(@ModelAttribute Item item, RedirectAttributes redirectAttributes){
         //이름 지정안하면 클래스이름 앞글자만 소문자 되서 강제로 집어넣음
         Item savedItem = itemRepository.save(item);
