@@ -51,7 +51,7 @@ public class BasicController {
 
     @GetMapping("/basic-objects")
     public String basicObjects(HttpSession session) {
-        session.setAttribute("sessionData", "Hello Session");
+        session.setAttribute("sessionData","Hello Session");
         return "basic/basic-objects";
     }
     @Component("helloBean")
@@ -63,7 +63,7 @@ public class BasicController {
 
     @GetMapping("/date")
     public String date(Model model){
-        model.addAttribute("localDateTime", LocalDateTime.now());
+        model.addAttribute("localDateTime",LocalDateTime.now());
         return "basic/date";
     }
 
