@@ -1,5 +1,6 @@
 package cshproject.itemservice.web.basic;
 
+import cshproject.itemservice.domain.item.DeliveryCode;
 import cshproject.itemservice.domain.item.Item;
 import cshproject.itemservice.domain.item.ItemRepository;
 import cshproject.itemservice.domain.item.ItemType;
@@ -11,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,6 +36,15 @@ public class BasicItemController {
     public ItemType[] itemTypes(){
         ItemType[] values = ItemType.values();
         return values;
+    }
+
+    @ModelAttribute("deliveryCodes")
+    public List<DeliveryCode> deliveryCodes(){
+        List<DeliveryCode> deliveryCodes=new ArrayList<>();
+        deliveryCodes.add(new DeliveryCode("FAST", "빠른 배송"));
+        deliveryCodes.add(new DeliveryCode("NORMAL", "일반 배송"));
+        deliveryCodes.add(new DeliveryCode("SLOW", "느린 배송"));
+        return deliveryCodes;
     }
 
     @Autowired
@@ -105,6 +116,7 @@ public class BasicItemController {
         log.info("item.open={}", item.isOpen());
         log.info("item.regions={}",item.getRegions());
         log.info("item.itemTypes={}",item.getItemType());
+        log.info("item.deliveryCode={}",item.getDeliveryCode());
         //이름 지정안하면 클래스이름 앞글자만 소문자 되서 강제로 집어넣음
         Item savedItem = itemRepository.save(item);
         // model.addAttribute("item",item); 자동추가되서 생략 가능
