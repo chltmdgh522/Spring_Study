@@ -3,6 +3,7 @@ package cshproject.itemservice.web.basic;
 import cshproject.itemservice.domain.item.Item;
 import cshproject.itemservice.domain.item.ItemRepository;
 import jakarta.annotation.PostConstruct;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +12,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
+@Slf4j
 @Controller
 @RequestMapping("/basic/items")
 public class BasicItemController {
@@ -82,6 +84,7 @@ public class BasicItemController {
 
     @PostMapping("/add")
     public String addItemV6(@ModelAttribute Item item, RedirectAttributes redirectAttributes){
+        log.info("item.open={}", item.isOpen());
         //이름 지정안하면 클래스이름 앞글자만 소문자 되서 강제로 집어넣음
         Item savedItem = itemRepository.save(item);
         // model.addAttribute("item",item); 자동추가되서 생략 가능
