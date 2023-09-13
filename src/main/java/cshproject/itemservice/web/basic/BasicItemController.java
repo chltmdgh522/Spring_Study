@@ -10,13 +10,24 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @Controller
 @RequestMapping("/basic/items")
 public class BasicItemController {
     private final ItemRepository itemRepository;
+
+    @ModelAttribute("regions")
+    public Map<String,String> regions(){
+        Map<String, String> regions=new LinkedHashMap<>();
+        regions.put("KOREA","한국");
+        regions.put("JAPAN","일본");
+        regions.put("CHINA","중국");
+        return regions;
+    }
 
     @Autowired
     public BasicItemController(ItemRepository itemRepository) {
@@ -85,6 +96,7 @@ public class BasicItemController {
     @PostMapping("/add")
     public String addItemV6(@ModelAttribute Item item, RedirectAttributes redirectAttributes){
         log.info("item.open={}", item.isOpen());
+        log.info("item.regions={}",item.getRegions());
         //이름 지정안하면 클래스이름 앞글자만 소문자 되서 강제로 집어넣음
         Item savedItem = itemRepository.save(item);
         // model.addAttribute("item",item); 자동추가되서 생략 가능
