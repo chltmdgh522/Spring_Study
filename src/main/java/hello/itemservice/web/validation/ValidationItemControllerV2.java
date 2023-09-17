@@ -7,9 +7,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.naming.Binding;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -43,35 +47,33 @@ public class ValidationItemControllerV2 {
     }
 
     @PostMapping("/add")
-    public String addItem(@ModelAttribute Item item, Model model,RedirectAttributes redirectAttributes) {
-
-        //검증 오류 결과를 보관
-        Map<String, String> errors=new HashMap<>();
+    public String addItemV1(@ModelAttribute Item item, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 
         //검증 로직
         if(!StringUtils.hasText(item.getItemName())) {//글자가 있냐 없냐
-            errors.put("itemName","상품 이름은 필수입니다.");
+
+            bindingResult.addError(new FieldError("item","itemName","상품명 작성하세요."));
         }
         if(item.getPrice()==null || item.getPrice()<1000 || item.getPrice()>1000000){
-            errors.put("price","가격은 1000~ 1000000 사이여야 됩니다.");
+
+            bindingResult.addError(new FieldError("item","price","가격은 1000~ 1000000 사이여야 됩니다."));
         }
         if(item.getQuantity()==null || item.getQuantity()>=9999){
-            errors.put("quantity","수량은 최대 9999까지 허용합니다.");
+
+            bindingResult.addError(new FieldError("item","quantity","수량은 최대 9999까지 허용합니다."));
         }
 
         //특정 필드가 아닌 복합을 검증
         if(item.getPrice() !=null && item.getQuantity() != null){
             int resultPrice=item.getPrice() * item.getQuantity();
              if(resultPrice<10000){
-                 errors.put("globalError","가격 곱하기 수량의 합은 10000원이상이여야 됩니다. 현재값: "+resultPrice);
-
+                 bindingResult.addError(new ObjectError("item","가격 곱하기 수량의 합은 10000원이상이여야 됩니다. 현재값: "+resultPrice));
              }
         }
 
         //검증에 실패하면 다시 입력 폼으로
-        if(!errors.isEmpty()){
-            log.info("errors={}",errors);
-            model.addAttribute("errors",errors);
+        if(bindingResult.hasErrors()){
+            log.info("errors={}",bindingResult);
             return "validation/v2/addForm";
         }
 
