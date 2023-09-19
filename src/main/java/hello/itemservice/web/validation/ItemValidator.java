@@ -10,17 +10,16 @@ import org.springframework.validation.Validator;
 
 @Component
 public class ItemValidator implements Validator {
+
     @Override
     public boolean supports(Class<?> clazz) {
-
         return Item.class.isAssignableFrom(clazz);
-
     }
 
     @Override
     public void validate(Object target, Errors errors) {
-        Item item = (Item) target;
-        //검증 로직
+        Item item= (Item) target;
+
         if (!StringUtils.hasText(item.getItemName())) {//글자가 있냐 없냐
 
             errors.rejectValue("itemName", "required");
