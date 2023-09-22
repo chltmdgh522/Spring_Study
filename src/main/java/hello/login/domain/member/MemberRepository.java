@@ -13,8 +13,8 @@ public class MemberRepository {
 
     public Member save(Member member) {
         member.setId(++sequence);
-        log.info("save: member={}", member);
-        store.put(member.getId(), member);
+        log.info("save: member={}",member);
+        store.put(member.getId(),member);
         return member;
     }
 
@@ -22,14 +22,14 @@ public class MemberRepository {
         return store.get(id);
     }
 
-    public Optional<Member> findByLoginId(String loginId) {
+    public Member findByLoginId(String loginId) {
         List<Member> all = findAll();
         for (Member member : all) {
-            if (member.getLoginId() == loginId) {
-                return Optional.of(member);
+            if (member.getLoginId().equals(loginId)) {
+                return  member;
             }
         }
-        return Optional.empty();
+        return null;
 
         /*
         return findAll().stream() // 마치 루프를 도는것이다.
