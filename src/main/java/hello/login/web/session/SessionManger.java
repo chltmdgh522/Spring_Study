@@ -20,7 +20,7 @@ public class SessionManger {
     //세션 생성
     public void createSession(Object value, HttpServletResponse response) {
         // 세션 ID를 생성하고 , 값을 세션에 저장
-        String sessionId = UUID.randomUUID().toString(); // 랜덤 생성
+        String sessionId = UUID.randomUUID().toString(); //랜덤생성
         sessionStore.put(sessionId, value);
 
         //쿠키 생성
@@ -52,9 +52,9 @@ public class SessionManger {
     }
 
     //세션 만료
-    public void expire(HttpServletRequest request){
+    public void expire(HttpServletRequest request) {
         Cookie sessionCookie = findCookie(request, SESSION_COOKIE_NAME);
-        if(sessionCookie !=null){
+        if (sessionCookie != null) {
             sessionStore.remove(sessionCookie.getValue());
         }
     }
