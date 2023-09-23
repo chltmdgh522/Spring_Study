@@ -22,15 +22,18 @@ public class MemberRepository {
         return store.get(id);
     }
 
-    public Member findByLoginId(String loginId) {
-        List<Member> all = findAll();
-        for (Member member : all) {
-            if (member.getLoginId().equals(loginId)) {
-                return  member;
-            }
-        }
-        return null;
+    public Optional<Member> findByLoginId(String loginId) {
+//        List<Member> all = findAll();
+//        for (Member member : all) {
+//            if (member.getLoginId().equals(loginId)) {
+//                return Optional.of(member);
+//            }
+//        }
+//        return Optional.empty();
 
+        return findAll().stream()
+                .filter(member -> member.getLoginId().equals(loginId))
+                .findFirst();
         /*
         return findAll().stream() // 마치 루프를 도는것이다.
                 .filter(member -> member.getLoginId().equals(loginId))
