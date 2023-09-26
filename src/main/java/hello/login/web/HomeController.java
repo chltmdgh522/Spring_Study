@@ -2,6 +2,7 @@ package hello.login.web;
 
 import hello.login.domain.member.Member;
 import hello.login.domain.member.MemberRepository;
+import hello.login.web.argumentresolver.Login;
 import hello.login.web.session.SessionConst;
 import hello.login.web.session.SessionManger;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +24,7 @@ public class HomeController {
     private final MemberRepository memberRepository;
 
     private final SessionManger sessionManger;
+
     //@GetMapping("/")
     public String home() {
 
@@ -30,18 +32,18 @@ public class HomeController {
     }
 
     //@GetMapping("/")
-    public String homeLogin(@CookieValue(value = "memberId",required = false
+    public String homeLogin(@CookieValue(value = "memberId", required = false
             /*false 이유가 로그인 안한 사람도 들어오게 할려고 또한 String 이여야 되는데
             * 스프링이 자동으로 타입 컨버터 해줌*/) Long memberId, Model model) {
-        if(memberId==null){
+        if (memberId == null) {
             return "home";
         }
         //로그인
         Member loginMember = memberRepository.findById(memberId);
-        if(loginMember==null){
+        if (loginMember == null) {
             return "home"; //굳이 해야되나 싶지만 악용이 있기때문에 해야될듯..
         }
-        model.addAttribute("member",loginMember);
+        model.addAttribute("member", loginMember);
         return "loginHome";
     }
 
@@ -49,12 +51,12 @@ public class HomeController {
     public String homeLoginV2(HttpServletRequest request, Model model) {
 
         //세션 관리자에 저장된 회원 정보 조회
-        Member member = (Member)sessionManger.getSession(request);
+        Member member = (Member) sessionManger.getSession(request);
         //로그인
-        if(member==null){
+        if (member == null) {
             return "home";
         }
-        model.addAttribute("member",member);
+        model.addAttribute("member", member);
         return "loginHome";
     }
 
@@ -63,30 +65,43 @@ public class HomeController {
 
         HttpSession session = request.getSession(false);
 
-        if(session==null){
+        if (session == null) {
             return "home";
         }
-        Member loginMember = (Member)session.getAttribute(SessionConst.LOGIN_MEMBER);
+        Member loginMember = (Member) session.getAttribute(SessionConst.LOGIN_MEMBER);
 
         //세션에 회원 데이터가 없으면 home
-        if(loginMember==null){
+        if (loginMember == null) {
             return "home";
         }
         //세션이 유지되면 로그인으로 이동
-        model.addAttribute("member",loginMember);
+        model.addAttribute("member", loginMember);
+        return "loginHome";
+    }
+
+    //@GetMapping("/")
+    public String homeLoginV3Spring(@SessionAttribute(name = SessionConst.LOGIN_MEMBER, required = false) Member loginMember,
+                                    Model model) {
+
+        //세션에 회원 데이터가 없으면 home
+        if (loginMember == null) {
+            return "home";
+        }
+        //세션이 유지되면 로그인으로 이동
+        model.addAttribute("member", loginMember);
         return "loginHome";
     }
 
     @GetMapping("/")
-    public String homeLoginV3Spring(@SessionAttribute(name=SessionConst.LOGIN_MEMBER, required = false) Member loginMember,
+    public String homeLoginV3ArgumentResolver(@Login Member loginMember,
                                     Model model) {
 
         //세션에 회원 데이터가 없으면 home
-        if(loginMember==null){
+        if (loginMember == null) {
             return "home";
         }
         //세션이 유지되면 로그인으로 이동
-        model.addAttribute("member",loginMember);
+        model.addAttribute("member", loginMember);
         return "loginHome";
     }
 }
