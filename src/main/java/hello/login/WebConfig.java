@@ -1,10 +1,12 @@
 package hello.login;
 
+import hello.login.web.argumentresolver.Login;
 import hello.login.web.argumentresolver.LoginMemberArgumentResolver;
 import hello.login.web.filter.LogFilter;
 import hello.login.web.filter.LoginCheckFilter;
 import hello.login.web.interceptor.LogCheckInterceptor;
 import hello.login.web.interceptor.LogInterceptor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,6 +18,7 @@ import javax.servlet.Filter;
 import java.util.List;
 
 @Configuration
+@RequiredArgsConstructor
 public class WebConfig implements WebMvcConfigurer {
 
     @Override
@@ -45,10 +48,12 @@ public class WebConfig implements WebMvcConfigurer {
         return filterRegistrationBean;
     }
 
-    //@Bean
-    public FilterRegistrationBean loginCheckFilter(){
+
+    private final LoginCheckFilter loginCheckFilter ;
+   // @Bean
+    public FilterRegistrationBean loginCheck(){
         FilterRegistrationBean<Filter> filterRegistrationBean=new FilterRegistrationBean();
-        filterRegistrationBean.setFilter(new LoginCheckFilter());
+        filterRegistrationBean.setFilter(loginCheckFilter);
         filterRegistrationBean.setOrder(2);
         filterRegistrationBean.addUrlPatterns("/*");
 
