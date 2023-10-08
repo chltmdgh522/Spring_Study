@@ -14,7 +14,7 @@ public class MyNumberFormatterTest {
 
     @Test
     void parse() throws ParseException {
-        Number parse = formatter.parse("1000", Locale.KOREA);
+        Number parse = formatter.parse("1,000", Locale.KOREA);
         assertThat(parse).isEqualTo(1000L);
     }
 
