@@ -47,22 +47,22 @@ public class ItemController {
         item.setImageFiles(storeImageFiles);
         itemRepository.save(item);
 
-        redirectAttributes.addAttribute("itemId",item.getId()); // 리다이렉트시 중요
+        redirectAttributes.addAttribute("itemId", item.getId()); // 리다이렉트시 중요
 
         return "redirect:/items/{itemId}";
     }
 
     @GetMapping("/items/{id}")
-    public String items(@PathVariable Long id, Model model){
+    public String items(@PathVariable Long id, Model model) {
         Item item = itemRepository.findById(id);
-        model.addAttribute("item",item);
+        model.addAttribute("item", item);
         return "item-view";
     }
 
     @ResponseBody
     @GetMapping("/images/{filename}")
     public Resource downloadImage(@PathVariable String filename) throws MalformedURLException {
-        return new UrlResource("file:"+fileStore.getFullPath(filename));
+        return new UrlResource("file:" + fileStore.getFullPath(filename));
     }
 
     @GetMapping("/attach/{itemId}")
@@ -71,13 +71,13 @@ public class ItemController {
         String storeFileName = item.getAttachFile().getStoreFileName();
         String uploadFileName = item.getAttachFile().getUploadFileName();
         UrlResource resource = new UrlResource("file:" + fileStore.getFullPath(storeFileName));
-        log.info("uploadFileName={}",uploadFileName);
+        log.info("uploadFileName={}", uploadFileName);
 
-        String encodeUploadFileName= UriUtils.encode(uploadFileName, StandardCharsets.UTF_8);
-        String contentDisposition="attachment; filename=\""+ encodeUploadFileName+"\"";
+        String encodeUploadFileName = UriUtils.encode(uploadFileName, StandardCharsets.UTF_8);
+        String contentDisposition = "attachment; filename=\"" + encodeUploadFileName + "\"";
 
         return ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_DISPOSITION,contentDisposition)
+                .header(HttpHeaders.CONTENT_DISPOSITION, contentDisposition)
                 .body(resource);
 
     }
