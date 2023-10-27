@@ -40,6 +40,6 @@ class MemberRepositoryV0Test {
 
     @Test
     void crud1() throws SQLException{
-        repository.delete("null");
+        repository.findById("최승호3");
     }
 }
