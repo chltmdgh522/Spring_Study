@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.*;
+import java.sql.SQLException;
 
 @Slf4j
 @Controller
@@ -32,7 +33,7 @@ public class LoginController {
     }
 
     //@PostMapping("/login")
-    public String login(@Validated @ModelAttribute LoginForm form, BindingResult bindingResult, HttpServletResponse response) {
+    public String login(@Validated @ModelAttribute LoginForm form, BindingResult bindingResult, HttpServletResponse response) throws SQLException {
         if(bindingResult.hasErrors()){
             return "/login/loginForm";
         }
@@ -51,7 +52,7 @@ public class LoginController {
 
 
     //@PostMapping("/login")
-    public String loginV2(@Validated @ModelAttribute LoginForm form, BindingResult bindingResult, HttpServletResponse response) {
+    public String loginV2(@Validated @ModelAttribute LoginForm form, BindingResult bindingResult, HttpServletResponse response) throws SQLException {
         if(bindingResult.hasErrors()){
             return "/login/loginForm";
         }
@@ -69,7 +70,7 @@ public class LoginController {
     }
 
     //@PostMapping("/login")
-    public String loginV3(@Validated @ModelAttribute LoginForm form, BindingResult bindingResult, HttpServletRequest request) {
+    public String loginV3(@Validated @ModelAttribute LoginForm form, BindingResult bindingResult, HttpServletRequest request) throws SQLException {
         if(bindingResult.hasErrors()){
             return "/login/loginForm";
         }
@@ -90,7 +91,7 @@ public class LoginController {
     @PostMapping("/login")
     public String loginV4(@Validated @ModelAttribute LoginForm form, BindingResult bindingResult,
                           @RequestParam(defaultValue="/") String redirectURL,
-                          HttpServletRequest request) {
+                          HttpServletRequest request) throws SQLException {
         if(bindingResult.hasErrors()){
             return "/login/loginForm";
         }

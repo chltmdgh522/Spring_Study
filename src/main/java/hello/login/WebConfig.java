@@ -28,14 +28,10 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new LogInterceptor())
-                .order(1) //체인 방식
-                .addPathPatterns("/**") //여기 하위 전부다
-                .excludePathPatterns("/css/**","/*.ico","/error");
         registry.addInterceptor(new LogCheckInterceptor())
-                .order(2)
+                .order(1)
                 .addPathPatterns("/**")
-                .excludePathPatterns("/","/member/add","/login","/css/**","/*.ico","/error");
+                .excludePathPatterns("/","/members/add","/login","/css/**","/*.ico","/error");
     }
 
     //@Bean
