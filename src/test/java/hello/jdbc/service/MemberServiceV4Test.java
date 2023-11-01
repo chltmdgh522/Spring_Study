@@ -2,9 +2,12 @@ package hello.jdbc.service;
 
 import hello.jdbc.domain.Member;
 import hello.jdbc.repository.MemberRepositoryV3;
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.springframework.aop.support.AopUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -23,11 +26,11 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 
 /**
- * 트랜잭션 - 커넥션 파리미터 동자가
+ * 트랜잭션 - DataSource  transactionManager 자동 등록
  */
 @Slf4j
 @SpringBootTest // 스프링 컨테이너 만들어주고 빈들을 사용할 수 있다.
-class MemberServiceV3_3Test {
+class MemberServiceV4Test {
     public static final String Member_A = "memberA";
     public static final String Member_B = "memberB";
     public static final String Member_EX = "ex";
@@ -40,19 +43,16 @@ class MemberServiceV3_3Test {
 
     @TestConfiguration//스프링 부트가 자동으로 만들어주는 빈들에 추가로 필요한 스프링 빈 등록
     static class TestConfig {
-        @Bean
-        DataSource dataSource() {
-            return new DriverManagerDataSource(URL, USERNAME, PASSWORD);
-        }
 
-        @Bean
-        PlatformTransactionManager transactionManager() {
-            return new DataSourceTransactionManager(dataSource());
+        private  final DataSource dataSource;
+
+        public TestConfig(DataSource dataSource) {
+            this.dataSource = dataSource;
         }
 
         @Bean
         MemberRepositoryV3 memberRepositoryV3() {
-            return new MemberRepositoryV3(dataSource());
+            return new MemberRepositoryV3(dataSource);
         }
 
         @Bean
