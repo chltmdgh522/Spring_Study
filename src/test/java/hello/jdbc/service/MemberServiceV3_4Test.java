@@ -1,9 +1,7 @@
 package hello.jdbc.service;
 
 import hello.jdbc.domain.Member;
-import hello.jdbc.repository.MemberRepository;
 import hello.jdbc.repository.MemberRepositoryV3;
-import hello.jdbc.repository.MemberRepositoryV4_1;
 import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
@@ -23,41 +21,38 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 
 /**
- * 예외 누수 문제 해결
- * SQLException 제거
- * MemberRepository 인터페이스 의존
+ * 트랜잭션 - DataSource  transactionManager 자동 등록
  */
-
 @Slf4j
 @SpringBootTest // 스프링 컨테이너 만들어주고 빈들을 사용할 수 있다.
-class MemberServiceV4Test {
+class MemberServiceV3_4Test {
     public static final String Member_A = "memberA";
     public static final String Member_B = "memberB";
     public static final String Member_EX = "ex";
 
     @Autowired
-    private MemberRepository memberRepository;
+    private MemberRepositoryV3 memberRepository;
 
     @Autowired
-    private MemberServiceV4 memberService;
+    private MemberServiceV3_3 memberService;
 
     @TestConfiguration//스프링 부트가 자동으로 만들어주는 빈들에 추가로 필요한 스프링 빈 등록
     static class TestConfig {
 
-        private final DataSource dataSource;
+        private  final DataSource dataSource;
 
         public TestConfig(DataSource dataSource) {
             this.dataSource = dataSource;
         }
 
         @Bean
-        MemberRepository memberRepository() {
-            return new MemberRepositoryV4_1(dataSource);
+        MemberRepositoryV3 memberRepositoryV3() {
+            return new MemberRepositoryV3(dataSource);
         }
 
         @Bean
-        MemberServiceV4 memberServiceV4() {
-            return new MemberServiceV4(memberRepository());
+        MemberServiceV3_3 memberServiceV3_3() {
+            return new MemberServiceV3_3(memberRepositoryV3());
         }
 
     }
@@ -81,7 +76,7 @@ class MemberServiceV4Test {
 
     @Test
     @DisplayName("정상 이체")
-    void accountTransfer() {
+    void accountTransfer() throws SQLException {
         //given
         Member memberA = new Member(Member_A, 10000);
         Member memberB = new Member(Member_B, 10000);
@@ -102,7 +97,7 @@ class MemberServiceV4Test {
 
     @Test
     @DisplayName("이체중 예외 발생")
-    void accountTransferEX() {
+    void accountTransferEX() throws SQLException {
         //given
         Member memberA = new Member(Member_A, 10000);
         Member memberEx = new Member(Member_EX, 10000);
