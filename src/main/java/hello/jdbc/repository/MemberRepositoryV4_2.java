@@ -16,16 +16,15 @@ import java.util.NoSuchElementException;
  */
 
 @Slf4j
-
 public class MemberRepositoryV4_2 implements MemberRepository {
 
     private final DataSource dataSource;
 
     private final SQLExceptionTranslator exTranslator;
 
-    public MemberRepositoryV4_2(DataSource dataSource) {
-        this.dataSource = dataSource;
-        this.exTranslator = new SQLErrorCodeSQLExceptionTranslator(dataSource);
+    public MemberRepositoryV4_2(DataSource dataSource){
+        this.dataSource=dataSource;
+        this.exTranslator=new SQLErrorCodeSQLExceptionTranslator(dataSource);
     }
 
     @Override

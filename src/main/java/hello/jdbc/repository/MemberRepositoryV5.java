@@ -13,7 +13,6 @@ import javax.sql.DataSource;
  */
 
 @Slf4j
-
 public class MemberRepositoryV5 implements MemberRepository {
 
     private final JdbcTemplate template;
