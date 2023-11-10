@@ -19,6 +19,7 @@ import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.SimpleTimeZone;
 
 /**
  * JdbcTemplate 구현
@@ -37,7 +38,6 @@ public class JdbcTemplateItemRepositoryV1 implements ItemRepository {
         String sql = "insert into item (item_name, price, quantity) values (?, ?, ?)";
         KeyHolder keyHolder = new GeneratedKeyHolder(); // 키값 가져옴
         jdbcTemplate.update(con -> {
-            //자동증가 키
             PreparedStatement ps = con.prepareStatement(sql, new String[]{"id"});
             ps.setString(1, item.getItemName());
             ps.setInt(2, item.getPrice());
@@ -102,14 +102,14 @@ public class JdbcTemplateItemRepositoryV1 implements ItemRepository {
     }
 
     private RowMapper<Item> itemRowMapper() {
-        return ((rs, rowNum) -> {
+        return (rs, rowNum) -> {
             Item item = new Item();
-            item.setId(rs.getLong("id"));
             item.setItemName(rs.getString("item_name"));
-            item.setPrice(rs.getInt("price"));
+            item.setId(rs.getLong("id"));
             item.setQuantity(rs.getInt("quantity"));
+            item.setQuantity(rs.getInt("price"));
             return item;
-        });
+        };
     }
 
 }
