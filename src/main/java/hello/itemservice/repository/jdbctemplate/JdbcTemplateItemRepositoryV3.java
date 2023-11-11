@@ -111,4 +111,6 @@ public class JdbcTemplateItemRepositoryV3 implements ItemRepository {
         return BeanPropertyRowMapper.newInstance(Item.class);
     }
 
+    public void clearStore() {
+    }
 }
