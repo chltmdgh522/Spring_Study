@@ -49,7 +49,7 @@ class ItemRepositoryTest {
     }
 
 
-    @Commit
+    //@Commit
     @Test
     void save() {
         //given

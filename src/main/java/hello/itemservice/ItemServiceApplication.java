@@ -1,13 +1,17 @@
 package hello.itemservice;
 
+import com.zaxxer.hikari.HikariDataSource;
 import hello.itemservice.config.*;
 import hello.itemservice.repository.ItemRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Profile;
+
+import javax.sql.DataSource;
 
 
 //@Import(MemoryConfig.class) //스프링 구성 클래스에 다른 구성 클래스를 가져와서 해당 클래스의 빈(Bean) 설정을 현재 구성 클래스에 추가하도록 지시합니다.
@@ -15,6 +19,7 @@ import org.springframework.context.annotation.Profile;
 //@Import(JdbcTemplateV2Config.class)
 @Import(JdbcTemplateV3Config.class)
 @SpringBootApplication(scanBasePackages = "hello.itemservice.web")
+@Slf4j
 public class ItemServiceApplication {
 
 	public static void main(String[] args) {
@@ -27,4 +32,11 @@ public class ItemServiceApplication {
 		return new TestDataInit(itemRepository);
 	}
 
+//	@Bean
+//	@Profile("test")
+//	public DataSource dataSource(){
+//		log.info("데이터 초기화");
+//		HikariDataSource dataSource = new HikariDataSource();
+//		dataSource.se
+//	}
 }
