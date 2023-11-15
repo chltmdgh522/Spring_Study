@@ -5,6 +5,7 @@ import hello.itemservice.repository.ItemSearchCond;
 import hello.itemservice.repository.ItemUpdateDto;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,12 +14,10 @@ import java.util.Optional;
 public interface ItemMapper {
 
     void save(Item item);
-
-    void update(@Param("id") Long id, @Param("updateParam")ItemUpdateDto updateParam);
-
+    void update(@Param("id") Long id, @Param("updateParam") ItemUpdateDto
+            updateParam);
     Optional<Item> findById(Long id);
-
-    List<Item> findAll(ItemSearchCond itemSearchCond);
+    List<Item> findAll(ItemSearchCond itemSearch);
 
 
 }
