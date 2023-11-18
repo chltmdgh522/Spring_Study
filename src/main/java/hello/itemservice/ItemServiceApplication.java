@@ -18,7 +18,8 @@ import javax.sql.DataSource;
 // 즉 해당 빈타입을 여기다가 가져다가 쓸려고 다시말해서 빈 수동등록이라고 보면될듯 빈을 여기다 쓰면 @Configuration
 //@Import(JdbcTemplateV2Config.class)
 //@Import(JdbcTemplateV3Config.class)
-@Import(MyBatisConfig.class)
+//@Import(MyBatisConfig.class)
+@Import(JpaConfig.class)
 @SpringBootApplication(scanBasePackages = "hello.itemservice.web")
 @Slf4j
 public class ItemServiceApplication {
