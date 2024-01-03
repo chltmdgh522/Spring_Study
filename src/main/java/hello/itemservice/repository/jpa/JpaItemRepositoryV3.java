@@ -95,7 +95,7 @@ public class JpaItemRepositoryV3 implements ItemRepository {
 
         List<Item> result = query.select(QItem.item)
                 .from(QItem.item)
-                .where()
+                .where(builder)
                 .fetch();
         return result;
 
