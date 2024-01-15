@@ -52,7 +52,7 @@ public class TxBasicTest {
         public void nx(){
             log.info("call nonTx");
             boolean txActive = TransactionSynchronizationManager.isActualTransactionActive(); //트랜잭션이 활성화됐냐
-            log.info("tx active={}",txActive); //트랜잭션 관련 로직 수행안함 왜냐면 없기때문에 
+            log.info("tx active={}",txActive); //트랜잭션 관련 로직 수행안함 왜냐면 없기때문에
         }
     }
 }
