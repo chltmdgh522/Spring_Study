@@ -55,4 +55,38 @@ public class BasicTxTest {
 
     }
 
+    @Test
+    void double_commit() {
+        log.info("트랜잭션1 시작");
+        TransactionStatus status1 = txManger.getTransaction(new DefaultTransactionAttribute());
+        log.info("트랜잭션 1커밋 시작");
+        txManger.commit(status1);
+        log.info("트랜잭션 1커밋 완료");
+
+        log.info("트랜잭션2 시작");
+        TransactionStatus status2 = txManger.getTransaction(new DefaultTransactionAttribute());
+        log.info("트랜잭션 2커밋 시작");
+        txManger.commit(status2);
+        log.info("트랜잭션 2커밋 완료");
+
+
+    }
+
+    @Test
+    void double_commit_rollback() {
+        log.info("트랜잭션1 시작");
+        TransactionStatus status1 = txManger.getTransaction(new DefaultTransactionAttribute());
+        log.info("트랜잭션 1커밋 시작");
+        txManger.commit(status1);
+        log.info("트랜잭션 1커밋 완료");
+
+        log.info("트랜잭션2 시작");
+        TransactionStatus status2 = txManger.getTransaction(new DefaultTransactionAttribute());
+        log.info("트랜잭션 2롤백 시작");
+        txManger.rollback(status2);
+        log.info("트랜잭션 2롤백 완료");
+
+
+    }
+
 }
