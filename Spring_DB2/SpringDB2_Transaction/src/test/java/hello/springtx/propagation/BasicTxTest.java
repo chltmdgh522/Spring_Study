@@ -91,14 +91,14 @@ public class BasicTxTest {
     }
 
     @Test
-    void inner_commit(){
+    void inner_commit() {
         log.info("외부 트랜잭션 시작");
         TransactionStatus outer = txManger.getTransaction(new DefaultTransactionAttribute());
-        log.info("outer.isNewTransaction()={}",outer.isNewTransaction()); //처음 수행되는 트랜잭션인지
+        log.info("outer.isNewTransaction()={}", outer.isNewTransaction()); //처음 수행되는 트랜잭션인지
 
         log.info("내부 트랜잭션 시작");
         TransactionStatus inner = txManger.getTransaction(new DefaultTransactionAttribute());
-        log.info("inner.isNewTransaction()={}",inner.isNewTransaction());
+        log.info("inner.isNewTransaction()={}", inner.isNewTransaction());
 
         log.info("내부 트랜잭션 커밋");
         txManger.commit(inner);
@@ -108,14 +108,14 @@ public class BasicTxTest {
     }
 
     @Test
-    void outer_rollback(){
+    void outer_rollback() {
         log.info("외부 트랜잭션 시작");
         TransactionStatus outer = txManger.getTransaction(new DefaultTransactionAttribute());
-        log.info("outer.isNewTransaction()={}",outer.isNewTransaction()); //처음 수행되는 트랜잭션인지
+        log.info("outer.isNewTransaction()={}", outer.isNewTransaction()); //처음 수행되는 트랜잭션인지
 
         log.info("내부 트랜잭션 시작");
         TransactionStatus inner = txManger.getTransaction(new DefaultTransactionAttribute());
-        log.info("inner.isNewTransaction()={}",inner.isNewTransaction());
+        log.info("inner.isNewTransaction()={}", inner.isNewTransaction());
 
         log.info("내부 트랜잭션 커밋");
         txManger.commit(inner);
@@ -125,34 +125,34 @@ public class BasicTxTest {
     }
 
     @Test
-    void inner_rollback(){
+    void inner_rollback() {
         log.info("외부 트랜잭션 시작");
         TransactionStatus outer = txManger.getTransaction(new DefaultTransactionAttribute());
-        log.info("outer.isNewTransaction()={}",outer.isNewTransaction()); //처음 수행되는 트랜잭션인지
+        log.info("outer.isNewTransaction()={}", outer.isNewTransaction()); //처음 수행되는 트랜잭션인지
 
         log.info("내부 트랜잭션 시작");
         TransactionStatus inner = txManger.getTransaction(new DefaultTransactionAttribute());
-        log.info("inner.isNewTransaction()={}",inner.isNewTransaction());
+        log.info("inner.isNewTransaction()={}", inner.isNewTransaction());
 
         log.info("내부 트랜잭션 롤백");
         txManger.rollback(inner);
 
         log.info("외부 트랜잭션 커밋");
-        Assertions.assertThatThrownBy(()->txManger.commit(outer))
+        Assertions.assertThatThrownBy(() -> txManger.commit(outer))
                 .isInstanceOf(UnexpectedRollbackException.class);
     }
 
     @Test
-    void inner_rollback_requires_new(){
+    void inner_rollback_requires_new() {
         log.info("외부 트랜잭션 시작");
         TransactionStatus outer = txManger.getTransaction(new DefaultTransactionAttribute());
-        log.info("outer.isNewTransaction()={}",outer.isNewTransaction()); //처음 수행되는 트랜잭션인지
+        log.info("outer.isNewTransaction()={}", outer.isNewTransaction()); //처음 수행되는 트랜잭션인지
 
         log.info("내부 트랜잭션 시작");
-        DefaultTransactionAttribute definition=new DefaultTransactionAttribute();
+        DefaultTransactionAttribute definition = new DefaultTransactionAttribute();
         definition.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRES_NEW);//기존트랜잭션 무시 새로운 트랜잭션 만듬
         TransactionStatus inner = txManger.getTransaction(definition);
-        log.info("inner.isNewTransaction()={}",inner.isNewTransaction());
+        log.info("inner.isNewTransaction()={}", inner.isNewTransaction());
 
         log.info("내부 트랜잭션 롤백");
         txManger.rollback(inner);
@@ -160,8 +160,6 @@ public class BasicTxTest {
         log.info("외부 트랜잭션 커밋");
         txManger.commit(outer);
     }
-
-
 
 
 }
