@@ -1,0 +1,12 @@
+span{
+    font-size:50px;
+    font-weight: bold;
+}
+a{
+    text-align: center;
+    text-decoration: none; /* 링크의 밑줄 제거 */
+    color: inherit; /* 링크의 색상 제거 */
+}
+body{
+    background-color: beige;
+}
