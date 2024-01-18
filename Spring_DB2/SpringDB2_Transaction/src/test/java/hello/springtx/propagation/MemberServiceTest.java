@@ -55,7 +55,7 @@ class MemberServiceTest {
         org.assertj.core.api.Assertions.assertThatThrownBy(()->memberService.joinV1(username))
                         .isInstanceOf(RuntimeException.class);
 
-        //then 모든 데이터가 정상저장된다.
+        //then
         Assertions.assertTrue(memberRepository.find(username).isPresent());
         Assertions.assertTrue(logRepository.find(username).isEmpty());
 
@@ -97,6 +97,27 @@ class MemberServiceTest {
         //then 모든 데이터가 정상저장된다.
         Assertions.assertTrue(memberRepository.find(username).isPresent());
         Assertions.assertTrue(logRepository.find(username).isPresent());
+
+    }
+
+
+    /**
+     * MemberService @Transactional:ON
+     * MemberRepository @Transactional:ON
+     * LogRepository @Transactional:ON Exception
+     */
+    @Test
+    void outerTxOn_fail(){
+        //given
+        String username="로그예외_outerTxOff_success";
+
+        //when
+        org.assertj.core.api.Assertions.assertThatThrownBy(()->memberService.joinV1(username))
+                .isInstanceOf(RuntimeException.class);
+
+        //then 전체가 롤백됨
+        Assertions.assertTrue(memberRepository.find(username).isEmpty());
+        Assertions.assertTrue(logRepository.find(username).isEmpty());
 
     }
 
