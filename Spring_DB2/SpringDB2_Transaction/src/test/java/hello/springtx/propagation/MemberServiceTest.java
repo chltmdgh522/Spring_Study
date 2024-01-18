@@ -81,4 +81,23 @@ class MemberServiceTest {
 
     }
 
+    /**
+     * MemberService @Transactional:ON
+     * MemberRepository @Transactional:ON
+     * LogRepository @Transactional:ON
+     */
+    @Test
+    void outerTxOn_success(){
+        //given
+        String username="outerTxOff_success";
+
+        //when
+        memberService.joinV1(username);
+
+        //then 모든 데이터가 정상저장된다.
+        Assertions.assertTrue(memberRepository.find(username).isPresent());
+        Assertions.assertTrue(logRepository.find(username).isPresent());
+
+    }
+
 }
