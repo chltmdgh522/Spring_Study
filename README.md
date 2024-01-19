@@ -1,5 +1,6 @@
 ## 🥇 김영한님의 스프링 강의 🥇
 ![image](https://github.com/chltmdgh522/Spring_study1/assets/74850409/cab4b38a-faef-435b-9957-9d1ba26aa770)
+### 블로그 비번은 qkek0312 || 바다0312
 ### 스프링 기본 핵심 원리 23.2.3 ~ 23.4.15 
 - https://balhae.tistory.com/25
 - https://balhae.tistory.com/28
@@ -77,3 +78,4 @@
   
 ##### SpringDB2_Transaction
 - https://balhae.tistory.com/152
+- https://balhae.tistory.com/153
